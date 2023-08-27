@@ -3,9 +3,16 @@ package chatting.application;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.border.*;
+
 
 public class Main extends JFrame implements ActionListener {
 
+	JTextField text1;
+	JPanel panel2;
+	
+	Box vertical = Box.createVerticalBox();
+	
 	//Frame - Constructor
 	Main(){
 		
@@ -59,21 +66,69 @@ public class Main extends JFrame implements ActionListener {
 		back5.setBounds(400,20,25,25);
 		panel1.add(back5);
 		
+		panel2 = new JPanel();
+		panel2.setBounds(5, 75, 440, 570);
+		add(panel2);
+		
+		text1 = new JTextField();
+		text1.setBounds(5, 655, 330, 40);
+		text1.setFont(new Font("SAN_SERIF", Font.PLAIN, 16) );
+		add(text1);
+		
+		JButton send = new JButton("Send");
+		send.setBounds(320,655,133,40);
+		send.setBackground(new Color(30,94,84));
+		  send.setForeground(Color.WHITE);
+		send.addActionListener(this);
+		send.setFont(new Font("SAN_SERIF", Font.PLAIN, 16) );
+		add(send);
+		
 		setSize(450, 700);
-		setLocation(200, 30);
+		setLocation(200, 30); 
+		setUndecorated(true);
 		getContentPane().setBackground(Color.WHITE);
 		
 		setVisible(true);
 	}
 	
 	public void actionPerformed(ActionEvent ae) {
+		String out = text1.getText();
 		
+		JPanel output1 = formatLabel(out);
+		
+		panel2.setLayout(new BorderLayout());
+		
+		JPanel right = new JPanel(new BorderLayout());
+		right.add(output1, BorderLayout.LINE_END);
+		vertical.add(right);
+		vertical.add(Box.createVerticalStrut(15));
+		
+		panel2.add(vertical, BorderLayout.PAGE_START);
+		
+		repaint();
+		invalidate();
+		validate();
+	}
+	
+	public static JPanel formatLabel(String out) {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		
+		JLabel output = new JLabel(out);
+		output.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		output.setBackground(new Color(37, 211,102));
+		output.setOpaque(true);
+		output.setBorder(new EmptyBorder(15, 15, 15,50));
+		
+		panel.add(output);
+		
+		return panel;
 	}
 	
 	public static void main(String[] args) {
 		
 		new Main(); // Anonymous object
-		System.out.println("Hello");
+		System.out.println("TEST");
 	}
 
 }
