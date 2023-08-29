@@ -154,7 +154,7 @@ public class Main implements ActionListener {
 		System.out.println("TEST");
 		
 		try {
-			ServerSocket skt = new ServerSocket(2000);
+			ServerSocket skt = new ServerSocket(6001);
 			while(true) {
 				Socket s = skt.accept();
 				DataInputStream din = new DataInputStream(s.getInputStream());
